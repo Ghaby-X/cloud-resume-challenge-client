@@ -46,5 +46,5 @@ jobs:
 
       - name: upload files to blob storage
         run: |
-          az storage blob upload-batch -d "$web" -s ${{ env.WORKING_DIRECTORY }} --connection-string ${{ env.AZURE_STORAGE_CONNECTION_STRING }}
+          az storage blob upload-batch -d "$web" -s ${{ env.WORKING_DIRECTORY }}
 
