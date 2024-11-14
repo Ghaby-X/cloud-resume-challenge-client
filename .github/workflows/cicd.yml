@@ -49,7 +49,6 @@ jobs:
         run: |
           az storage blob upload-batch \
           --account-name ${{ env.AZURE_ACCOUNT_NAME }} \
-          --destination "$web" \
+          --destination '$web' \
           --source ${{ env.WORKING_DIRECTORY }} \
-          --connection-string "${{ env.AZURE_STORAGE_CONNECTION_STRING }}"
 
