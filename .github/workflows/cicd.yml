@@ -17,7 +17,7 @@ env:
     ARM_TENANT_ID: ${{ secrets.TENANT_ID}}
     ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID}}
     WORKING_DIRECTORY: './'
-    AZURE_STORAGE_CONNECTION_STRING.: ${{ secrets.CONNECTION_STRING }}
+    
   
 
 
@@ -45,6 +45,8 @@ jobs:
       
 
       - name: upload files to blob storage
+        env:
+          AZURE_STORAGE_CONNECTION_STRING.: ${{ secrets.CONNECTION_STRING }}
         run: |
-          az storage blob upload-batch -d "$web" -s ${{ env.WORKING_DIRECTORY }}
+          az storage blob upload-batch -destination "$web" --source ${{ env.WORKING_DIRECTORY }} --connection-string "${{ env.AZURE_STORAGE_CONNECTION_STRING }}"
 
