@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-    workflow_dispatch:
+      
+  workflow_dispatch:
 
 
 env:
@@ -21,10 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
     
       - name: Check presence of index.html
-      - run: |
+        run: |
           if [ ! -f "./index.html"]; then
             echo "Error: index.html is missing"
             exit 1
