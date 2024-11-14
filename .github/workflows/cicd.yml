@@ -9,7 +9,6 @@ on:
 
 
 permissions:
-  contents: 'read'
   id-token: 'write'
 
 env:
@@ -38,9 +37,8 @@ jobs:
           fi
       
       - name: Azure CLI login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
-          azcliversion: 2.30.1
           client-id: ${{env.ARM_CLIENT_ID}}
           tenant-id: ${{env.ARM_TENANT_ID}}
           subscription-id: ${{env.ARM_SUBSCRIPTION_ID}}
