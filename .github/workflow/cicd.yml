@@ -1,0 +1,45 @@
+name: Deploy site on Azure storage static website
+
+on:
+  push:
+    branches:
+      - main
+    workflow_dispatch:
+
+
+env:
+    ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+    ARM_TENANT_ID: ${{ secrets.TENANT_ID}}
+    ARM_SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID}}
+    WORKING_DIRECTORY: './'
+    AZURE_STORAGE_CONNECTION_STRING.: ${{ secrets.CONNECTION_STRING }}
+  
+
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+      - uses: actions/checkout@v4
+    
+      - name: Check presence of index.html
+      - run: |
+          if [ ! -f "./index.html"]; then
+            echo "Error: index.html is missing"
+            exit 1
+          fi
+      
+      - name: Azure CLI login
+        uses: azure/login@v1
+        with:
+          azcliversion: 2.30.1
+          client-id: ${{env.ARM_CLIENT_ID}}
+          tenant-id: ${{env.ARM_TENANT_ID}}
+          subscription-id: ${{env.ARM_SUBSCRIPTION_ID}}
+      
+
+      - name: upload files to blob storage
+        run: |
+          az storage blob upload-batch -d $web -s ${{ env.WORKING_DIRECTORY }}
+
