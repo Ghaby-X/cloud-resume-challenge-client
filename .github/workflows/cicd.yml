@@ -49,4 +49,5 @@ jobs:
           --account-name ${{ env.AZURE_ACCOUNT_NAME }} \
           --destination '$web' \
           --source ${{ env.WORKING_DIRECTORY }} \
+          --overwrite true \
 
