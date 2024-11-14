@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - main
-      
+
   workflow_dispatch:
 
+
+permissions:
+  contents: 'read'
+  id-token: 'write'
 
 env:
     ARM_CLIENT_ID: ${{ secrets.CLIENT_ID }}
